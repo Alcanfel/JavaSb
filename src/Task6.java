@@ -7,7 +7,6 @@ class Task6{
 		unionString("abbv", "kllii");
         		
     }
-	
 	public static void unionString(String a, String b){
 		String str_concat = a.concat(b);
         StringBuilder result = new StringBuilder();
