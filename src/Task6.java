@@ -1,4 +1,4 @@
-class UnionMain{
+class Task6{
     public static void main(String[] args){
 		unionString("abcddg", "andfgha");
 		unionString("aaabbcc", "ccadf");

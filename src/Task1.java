@@ -16,7 +16,6 @@ class Task1{
         System.out.format("2) Тип авто имеющий наибольшую стоимость расходов: %s\n",typeAutoMax(arrayGroupVariantOne));
         System.out.format("2) Тип авто имеющий наименьшую стоимость расходов: %s\n",typeAutoMin(arrayGroupVariantOne));
 
-
         // Получаем массив сгруппированных по типу авто, сумму расходов за ГСМ, где расход топлива разный
         String[] arrayGroupVariantTwo = groupByCostGsm(arrayCodeMileage, arrayTypeFuel, arrayDifferentFuel);
         System.out.println("\n---Расход топлива разный---");
