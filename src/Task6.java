@@ -14,6 +14,6 @@ class Task6{
         for (int i = 0; i < str_concat.length() ;i++){
             if (result.indexOf(String.valueOf(chr_str_contact[i])) == -1) result.append(chr_str_contact[i]);
         }
-        System.out.format("бъединение строк без дублирования символов!\nСтрока 1:%s \nСтрока 2:%s \nРезультат: %s \n",a, b, result);
+        System.out.format("Объединение строк без дублирования символов!\nСтрока 1:%s \nСтрока 2:%s \nРезультат: %s \n",a, b, result);
 	}
 }
