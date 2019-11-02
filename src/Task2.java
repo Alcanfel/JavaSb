@@ -3,7 +3,7 @@ import java.util.regex.Pattern;
 
 class Task2 {
     public static void main(String[] args) {
-        getReverse("Программирование это хорошо, но есть что-то лучше!");
+        getReverse("Программирование это хорошо, но есть что-то лучше");
         System.out.println();
         //проверка:
         getReverse("Всем на свете это ясно —");
