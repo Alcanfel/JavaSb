@@ -3,10 +3,20 @@ import java.util.regex.Pattern;
 
 class Task2 {
     public static void main(String[] args) {
-        String str = "Программирование это хорошо, но есть что-то лучше";
+        getReverse("Программирование это хорошо, но есть что-то лучше!");
+        System.out.println();
+        //проверка:
+        getReverse("Всем на свете это ясно —");
+        getReverse("Быть программером прекрасно!");
+        getReverse("Ты, программер, умный очень —");
+        getReverse("Программируешь что хочешь!");
+    }
+
+    public static void getReverse(String str){
         String[] arrStr = str.split(" ");
         StringBuilder resStr = new StringBuilder();
-        Pattern pattern = Pattern.compile("[,?!]");
+        Pattern pattern = Pattern.compile("[,?!.:]");
+        //Ищем слова слова у которых знаки препинания в конце, извлекаем ззнак препинания и вставляем в начало с пробелом
         for (int i = 0; i < arrStr.length; i++) {
             Matcher matcher = pattern.matcher(arrStr[i]);
             while (matcher.find()) {
@@ -16,18 +26,13 @@ class Task2 {
                 arrStr[i]=String.valueOf(prep);
             }
         }
-
+        //Формируем выражение с конца
         for (int i = 0; i < arrStr.length; i++) {
             resStr.append(arrStr[arrStr.length - 1 - i]).append(" ");
         }
-
-//        Pattern pattern_2 = Pattern.compile("[,]");
-//        Matcher matcher = pattern_2.matcher(resStr);
-//
-//        while (matcher.find()) {
-//            resStr.replace(matcher.start()-1, matcher.end(), "" );
-//        }
-
-        System.out.println(resStr);
+        //Заменяем пробелы перед знаками препинания на пустую строку
+        Pattern pattern2 = Pattern.compile("\\s(?=[,?!.])");
+        Matcher matcher = pattern2.matcher(resStr);
+        System.out.println(matcher.replaceAll(""));
     }
 }
