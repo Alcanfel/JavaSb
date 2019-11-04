@@ -3,7 +3,8 @@ import java.util.regex.Pattern;
 
 public class Task5 {
     public static void main(String[] args) {
-        getStringView("A12");
+        getStringView("A12:Z12");
+        getStringView("B13:D26");
         getStringView("Z12");
         getStringView("AA12");
         getStringView("AB12");
@@ -17,7 +18,16 @@ public class Task5 {
 
     }
 
-    public static void getStringView(String str) {
+    public static void getStringView(String s) {
+        String[] arrStr = s.split(":");
+        for (String temp: arrStr
+        ) {
+            getParseString(temp);
+        }
+        System.out.println();
+    }
+
+    public static void getParseString(String str) {
         //Шаблон по поиску двух групп (columns + rows)
         Pattern pattern = Pattern.compile("([A-Za-z]*)([0-9]*)");
         Matcher m = pattern.matcher(str);
