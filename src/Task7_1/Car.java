@@ -62,17 +62,21 @@ public class Car {
     public static void printInfo(Object[] b) {
         String[] arrayInfo = new String[b.length];
         int i = 0;
+        //Формируем общий массив по каждому автом ввида "тип:" + codeCar + "-номер:" + gosNomer + "-пробег:" + probeg;
         for (Object temp : b
         ) {
             Car s = (Car) temp;
             arrayInfo[i] = s.toString();
             i += 1;
         }
+
+        //Создаем массивы по кажому ввиду авто
         String[] arrayPassengerCar = new String[PassengerCar.count];
         String[] arrayTruck = new String[Truck.count];
         String[] arrayBus = new String[Bus.count];
         String[] arrayHeavyMachine = new String[HeavyMachine.count];
 
+        //Перебираем общий массив, добавляем по коду авто в соответствующий массив
         int p = 0, bu = 0, h = 0, t = 0;
         for (int j = 0; j < arrayInfo.length; j++) {
             switch (Integer.parseInt(arrayInfo[j].split("-")[0].split(":")[1])) {
@@ -99,6 +103,7 @@ public class Car {
             }
         }
 
+        //По очереди перебираем осортированные знаечния по пробегу и выводим на экран
         for (String temp : sortArray(arrayPassengerCar)
         ) {
             System.out.println(temp);
