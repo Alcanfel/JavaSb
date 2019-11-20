@@ -33,6 +33,8 @@ public class Main {
         myLinkedList.max(); // 50
         myLinkedList.remove(0); // 50 20 10 40
         myLinkedList.show();
+        myLinkedList.replace(10,0);
+        myLinkedList.show();
 
 
 
