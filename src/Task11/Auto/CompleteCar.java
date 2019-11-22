@@ -116,7 +116,6 @@ public class CompleteCar {
         }
         return result;
     }
-
         //Возвращает тип авто имеющий наименьшую стоимость расходов
     public static String getCodeCarMinRashod() {
         String[] array = {PassengerCar.getSizeGsm(), Bus.getSizeGsm(), HeavyMachine.getSizeGsm(), Truck.getSizeGsm()};
