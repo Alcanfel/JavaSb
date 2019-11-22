@@ -21,10 +21,5 @@ public class Main {
 
         c.getHistory();
         c.getLastCalculate();
-
-
-
-
     }
-
 }

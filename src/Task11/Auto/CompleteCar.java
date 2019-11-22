@@ -154,7 +154,6 @@ public class CompleteCar {
         }
 
     }
-
     private static String getTotalSum(){
         return "Total: "+ String.valueOf(PassengerCar.sizeGsm + Bus.sizeGsm + HeavyMachine.sizeGsm + Truck.sizeGsm) + ";\n";
     }
