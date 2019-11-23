@@ -1,6 +1,6 @@
 package Task11.Auto;
 
-public abstract class Car {
+public abstract class Car implements Comparable<Car> {
     private int codeCar;
     private double typeToplivo;
     private double rashodToplivo;
@@ -49,6 +49,16 @@ public abstract class Car {
         this.probeg = probeg;
     }
 
+    @Override
+    public int compareTo(Car car) {
+        if (car.getCodeCar() == this.getCodeCar()){
+            if (!(car.getProbeg() == this.getProbeg())){
+               return Integer.compare((int) this.getProbeg(), (int) car.getProbeg());
+            }  else return -1;
+        } else {
+            return Integer.compare(this.getCodeCar(), car.getCodeCar());
+        }
+    }
 }
 
 //Легковой автомобиль
@@ -72,6 +82,45 @@ class PassengerCar extends Car{
         count+=1;
     }
 
+    public int getCodeCar() {
+        return codeCar;
+    }
+
+    public void setCodeCar(int codeCar) {
+        this.codeCar = codeCar;
+    }
+
+    public double getTypeToplivo() {
+        return typeToplivo;
+    }
+
+    public void setTypeToplivo(double typeToplivo) {
+        this.typeToplivo = typeToplivo;
+    }
+
+    public double getRashodToplivo() {
+        return rashodToplivo;
+    }
+
+    public void setRashodToplivo(double rashodToplivo) {
+        this.rashodToplivo = rashodToplivo;
+    }
+
+    public String getGosNomer() {
+        return gosNomer;
+    }
+
+    public void setGosNomer(String gosNomer) {
+        this.gosNomer = gosNomer;
+    }
+
+    public double getProbeg() {
+        return probeg;
+    }
+
+    public void setProbeg(double probeg) {
+        this.probeg = probeg;
+    }
 
     static String getSizeGsm(){
         return "ТипАвто-100: " + String.valueOf(sizeGsm)+"\n";
@@ -83,6 +132,16 @@ class PassengerCar extends Car{
                 ", ГосНомер='" + gosNomer + '\'' +
                 ", Пробег=" + probeg;
     }
+
+//    public int compareTo(PassengerCar passengerCar) {
+//        if (passengerCar.getCodeCar() == this.getCodeCar()){
+//            if (!(passengerCar.getProbeg() == this.getProbeg())){
+//                return Integer.compare((int) passengerCar.getProbeg(), (int) this.getProbeg());
+//            }  else return -1;
+//        } else {
+//            return Integer.compare(this.getCodeCar(), car.getCodeCar());
+//        }
+//    }
 }
 
 //Грузовой авто
@@ -117,6 +176,46 @@ class Truck extends Car {
                 ", ГосНомер='" + gosNomer + '\'' +
                 ", Пробег=" + probeg +
                 ", ДопПараметр=" + dopParameter;
+    }
+
+    public int getCodeCar() {
+        return codeCar;
+    }
+
+    public void setCodeCar(int codeCar) {
+        this.codeCar = codeCar;
+    }
+
+    public double getTypeToplivo() {
+        return typeToplivo;
+    }
+
+    public void setTypeToplivo(double typeToplivo) {
+        this.typeToplivo = typeToplivo;
+    }
+
+    public double getRashodToplivo() {
+        return rashodToplivo;
+    }
+
+    public void setRashodToplivo(double rashodToplivo) {
+        this.rashodToplivo = rashodToplivo;
+    }
+
+    public String getGosNomer() {
+        return gosNomer;
+    }
+
+    public void setGosNomer(String gosNomer) {
+        this.gosNomer = gosNomer;
+    }
+
+    public double getProbeg() {
+        return probeg;
+    }
+
+    public void setProbeg(double probeg) {
+        this.probeg = probeg;
     }
 }
 
@@ -153,6 +252,46 @@ class Bus extends Car {
                 ", Пробег=" + probeg +
                 ", ДопПараметр=" + dopParameter;
     }
+
+    public int getCodeCar() {
+        return codeCar;
+    }
+
+    public void setCodeCar(int codeCar) {
+        this.codeCar = codeCar;
+    }
+
+    public double getTypeToplivo() {
+        return typeToplivo;
+    }
+
+    public void setTypeToplivo(double typeToplivo) {
+        this.typeToplivo = typeToplivo;
+    }
+
+    public double getRashodToplivo() {
+        return rashodToplivo;
+    }
+
+    public void setRashodToplivo(double rashodToplivo) {
+        this.rashodToplivo = rashodToplivo;
+    }
+
+    public String getGosNomer() {
+        return gosNomer;
+    }
+
+    public void setGosNomer(String gosNomer) {
+        this.gosNomer = gosNomer;
+    }
+
+    public double getProbeg() {
+        return probeg;
+    }
+
+    public void setProbeg(double probeg) {
+        this.probeg = probeg;
+    }
 }
 
 
@@ -186,5 +325,45 @@ class HeavyMachine extends Car {
                 ", Госномер='" + gosNomer + '\'' +
                 ", Пробег=" + probeg +
                 ", ДопПараметр=" + dopParameter;
+    }
+
+    public int getCodeCar() {
+        return codeCar;
+    }
+
+    public void setCodeCar(int codeCar) {
+        this.codeCar = codeCar;
+    }
+
+    public double getTypeToplivo() {
+        return typeToplivo;
+    }
+
+    public void setTypeToplivo(double typeToplivo) {
+        this.typeToplivo = typeToplivo;
+    }
+
+    public double getRashodToplivo() {
+        return rashodToplivo;
+    }
+
+    public void setRashodToplivo(double rashodToplivo) {
+        this.rashodToplivo = rashodToplivo;
+    }
+
+    public String getGosNomer() {
+        return gosNomer;
+    }
+
+    public void setGosNomer(String gosNomer) {
+        this.gosNomer = gosNomer;
+    }
+
+    public double getProbeg() {
+        return probeg;
+    }
+
+    public void setProbeg(double probeg) {
+        this.probeg = probeg;
     }
 }

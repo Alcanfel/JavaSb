@@ -1,5 +1,8 @@
 package Task11.Auto;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class CompleteCar {
     //Возвращает массив объектов наследников абстрактного класса Car
     public static Object[] creatArrayObjectReferenceCar(String[] data) {
@@ -131,27 +134,11 @@ public class CompleteCar {
     }
 
     public static void printInfo(Object[] source){
-        String[] result = new String[source.length];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = source[i].toString();
-        }
 
-        for (int i = result.length - 1; i >= 1; i--) {
-            for (int j = 0; j < i; j++) {
-                if (
-                        Integer.parseInt(result[j].split(", ")[0].split("=")[1]) > Integer.parseInt(result[j+1].split(", ")[0].split("=")[1])
-                ) {
-                    String elem = result[j];
-                    result[j] = result[j + 1];
-                    result[j + 1] = elem;
-                }
-            }
+        Arrays.sort(source);
+        for (int i = 0; i <source.length ; i++) {
+            System.out.println(source[i]);
         }
-
-        for (int i = 0; i <result.length ; i++) {
-            System.out.println(result[i]);
-        }
-
     }
     private static String getTotalSum(){
         return "Total: "+ String.valueOf(PassengerCar.sizeGsm + Bus.sizeGsm + HeavyMachine.sizeGsm + Truck.sizeGsm) + ";\n";
