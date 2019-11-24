@@ -21,5 +21,31 @@ public class Main {
 
         c.getHistory();
         c.getLastCalculate();
+
+
+        // Проверка работы Стэка
+//        MyStack myStack = new MyStack();
+//        myStack.push("12");
+//        myStack.push("115");
+//        myStack.push("200");
+//        myStack.show();
+//        System.out.println("Посл элемент " + myStack.pop());
+//        myStack.show();
+//        System.out.println("Посл элемент " + myStack.pop());
+//        myStack.show();
+//        System.out.println("Посл элемент " + myStack.pop());
+//        myStack.show();
+//        System.out.println("Посл элемент " + myStack.pop());
+
+        Calculator engineering = new EngineeringCalc();
+        engineering.calculate("1 + ( 2 * 3 + 4 / 2 ) * 2 / 4");
+        engineering.calculate("( 10 * 34 ) / 2");
+        engineering.calculate("( 2 + 3 ) * ( 3 / 3 )");
+
+        engineering.getHistory();
+
+        engineering.getLastCalculate();
+
+
     }
 }
