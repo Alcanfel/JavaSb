@@ -19,7 +19,7 @@ public class Main {
         System.out.println(myList.next()); // 2
         System.out.println(myList.next()); // 3
         System.out.println(myList.next()); // 4
-        System.out.println(myList.hasNext()); // 4
+        System.out.println(myList.hasNext()); // false
 
 
 
