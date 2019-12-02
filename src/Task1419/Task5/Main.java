@@ -16,6 +16,7 @@ public class Main {
         map.put(3, "300");
         map.put(4, "300");
 
+
         Map<Object, Collection<Object> > newMap = reverse(map);
 
         for (Object temp: newMap.keySet()
