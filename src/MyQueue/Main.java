@@ -11,5 +11,6 @@ public class Main {
         System.out.println(myQueue.dequeue());
         System.out.println(myQueue.dequeue());
         myQueue.print();
+
     }
 }
