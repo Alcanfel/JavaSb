@@ -30,7 +30,8 @@ public class Main {
                 registration(sc);  //  Вызывается метод регистрации
                 continue; // далее повторяем, переходим к след итерации
             } else if (i == 2){
-                if (!autorisation(sc)){
+                String loginUser = autorisation(sc);
+                if (loginUser.equals(null)){ // Авторизация
                     System.out.println("Login or Password unknown");
                 } else {
 
@@ -44,7 +45,7 @@ public class Main {
 
                     do {
                         input = sc.nextLine();
-                        mylog.logAdd(input, user);
+                        mylog.logAdd(input, loginUser);
                         switch (input.split(" ")[0]) {
                             case "calc": {
                                 List<String> source = Files.readAllLines(Paths.get(dataFile));
@@ -94,26 +95,26 @@ public class Main {
     }
 
     // Авторизация
-    public static boolean autorisation(Scanner sc) throws IOException {
+    public static String autorisation(Scanner sc) throws IOException {
         MyLog mylog = new MyLog("logging.txt");
-        Map<String,String> mapUser = Complete.getDictFileUser();
+        Map<String,String> mapUser = Complete.getDictFileUser(); // словарь c пользваотелями
         System.out.print("Введите логин: ");
         String login = sc.nextLine();
-        mylog.logAdd(login, "Attenuator");
+        mylog.logAdd(login, login);
         if (!mapUser.containsKey(login)){
             System.out.println("Логин отсутствует в системе");
-            return false;
+            return null;
         } else {
             System.out.print("Введите пароль: ");
             String password = sc.nextLine();
-            mylog.logAdd(password, "Attenuator");
+            mylog.logAdd(password, login);
             if (mapUser.get(login).equals(password)){
                 System.out.println(String.format("Добро пожаловать %s!",login));
-                return true;
+                return login;
 
             } else {
                 System.out.println("Пароль введен неверно");
-                return false;
+                return null;
             }
         }
     }
