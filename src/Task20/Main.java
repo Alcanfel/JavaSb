@@ -9,28 +9,26 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-//        - добавить логирование действий (можно сделать позже, после реализации задачи 2).
-//
 //        * - сделать возможность добавлять и хранить информацию в разрезе каждого дня.
 
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        MyLog mylog = new MyLog("logging.txt");
+        MyLog mylog = new MyLog("logging.txt"); // Создали объект логирования - файл logging.txt
 
-        while (true){
+        while (true){ // в бесконечном цикле будем ожидать действия от пользователя, выйти из цила цифра 3
             Scanner sc = new Scanner(System.in);
             System.out.println("Добро пожаловать в приложение ГСМ");
             System.out.println("1) Выберите 1 для регистрации пользователя;");
             System.out.println("2) Выберите 2 для авторизации;");
             System.out.println("3) Выберите 3 для выхода;");
             Integer i = Integer.parseInt(sc.nextLine());
-            String user = "Attenuator";
+            String user = "noname"; // Пока что не знаем имя пользователя
             mylog.logAdd(String.valueOf(i), user);
             if (i == 1){
-                registration(sc);
-                continue;
+                registration(sc);  //  Вызывается метод регистрации
+                continue; // далее повторяем, переходим к след итерации
             } else if (i == 2){
                 if (!autorisation(sc)){
                     System.out.println("Login or Password unknown");
@@ -123,24 +121,25 @@ public class Main {
     // Регистрация пользователя
     public static void registration(Scanner sc) throws IOException {
         MyLog mylog = new MyLog("logging.txt");
-        Map<String, String> user = Complete.getDictFileUser();
-        while (true){
+        Map<String, String> user = Complete.getDictFileUser(); // словарь для пользователя (Логин-пароль)
+        while (true){ // Бескоечный цикл, где выход это обязательная регистрация или если логин уже имеется в файле
             System.out.print("Введите логин: ");
             String login = sc.nextLine();
-            mylog.logAdd(login, "Attenuator");
-            if (!user.containsKey(login)){
-                if (login.length()<8){
+            mylog.logAdd(login, "noname");
+            if (!user.containsKey(login)){ // Проверяем на наличие логина в файле, если есть идем дальше, нет выходим в главное регистрации и авторизации
+                if (login.length()<8){  //  Проверяем длину
                     System.out.println("Логин должен быть больше 7 символов");
                     continue;
                 } else {
                     while (true){
                         System.out.print("Введите пароль: ");
                         String password = sc.nextLine();
-                        mylog.logAdd(password, "Attenuator");
+                        mylog.logAdd(password, login);
                         if (password.length()<8){
                             System.out.println("Пароль должен содержать больше 7 символов");
                             continue;
                         } else {
+                            // После создания логина и пароля, записываем в файл
                             String result = login + "-"+password+"\n";
                             //Files.write(Paths.get("/home/attenuator/IdeaProjects/JavaSb/src/Task20/User.txt"), "\n".getBytes(), StandardOpenOption.APPEND);
                             Files.write(Paths.get("/home/attenuator/IdeaProjects/JavaSb/src/Task20/User.txt"), result.getBytes(), StandardOpenOption.APPEND);
@@ -154,6 +153,7 @@ public class Main {
                 }
             } else {
                 System.out.println(String.format("Пользоваль с логином %s уже имеется в базе", login));
+                break;
             }
 
         }

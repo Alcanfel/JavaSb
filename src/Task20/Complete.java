@@ -268,6 +268,7 @@ public class Complete {
 
     }
 
+    // Получить словарь пользователей, словарь формируется по файлу User.txt
     public static Map<String, String> getDictFileUser() throws IOException {
         Map<String, String> mapResult = new HashMap<>();
 //        List<String> source = Files.readAllLines(Paths.get("C:\\Users\\aitov-af\\IdeaProjects\\TaskPart2\\src\\NewTask\\User.txt"));
