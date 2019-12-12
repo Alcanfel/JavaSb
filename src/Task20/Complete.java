@@ -14,10 +14,8 @@ public class Complete {
     //Возвращает массив объектов наследников абстрактного класса Car
     public static List<Car> creatArrayObjectReferenceCar(List<String> data) throws IOException {
 
-        Map<String, Double> mapPriceFuel = getDictFile("/home/attenuator/IdeaProjects/JavaSb/src/Task20/PriceFuel.txt");
-        //Map<String, Double> mapPriceFuel = getDictFile("C:\\Users\\aitov-af\\IdeaProjects\\TaskPart2\\src\\NewTask\\PriceFuel.txt");
-        Map<String, Double> mapRateFuel = getDictFile("/home/attenuator/IdeaProjects/JavaSb/src/Task20/RateFuel.txt");
-        //Map<String, Double> mapRateFuel = getDictFile("C:\\Users\\aitov-af\\IdeaProjects\\TaskPart2\\src\\NewTask\\RateFuel.txt");
+        Map<String, Double> mapPriceFuel = getDictFile(MyPathFile.PRICEFUEL.getPathUbuntu());
+        Map<String, Double> mapRateFuel = getDictFile(MyPathFile.RATEFUEL.getPathUbuntu());
 
         Map<String, Map> dictSource= unionSameCodeCarAndGosNomer(data);
         List<Car> listCar = new ArrayList<>();
@@ -271,8 +269,7 @@ public class Complete {
     // Получить словарь пользователей, словарь формируется по файлу User.txt
     public static Map<String, String> getDictFileUser() throws IOException {
         Map<String, String> mapResult = new HashMap<>();
-//        List<String> source = Files.readAllLines(Paths.get("C:\\Users\\aitov-af\\IdeaProjects\\TaskPart2\\src\\NewTask\\User.txt"));
-        List<String> source = Files.readAllLines(Paths.get("/home/attenuator/IdeaProjects/JavaSb/src/Task20/User.txt"));
+        List<String> source = Files.readAllLines(Paths.get(MyPathFile.USER.getPathUbuntu()));
         for (String s: source
         ) {
             mapResult.put(s.split("-")[0], s.split("-")[1]);

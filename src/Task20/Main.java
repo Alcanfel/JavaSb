@@ -40,8 +40,8 @@ public class Main {
                     System.out.println("3) type [code] - вывод информации об отдельном типе авто");
                     System.out.println("4) exit - выход из программы");
                     String input;
-                    String dataFile = "/home/attenuator/IdeaProjects/JavaSb/src/Task20/DataCar.txt";
-                    //String dataFile = "C:\\Users\\aitov-af\\IdeaProjects\\TaskPart2\\src\\NewTask\\DataCar.txt";
+                    // Путь к файлу хранится в энуме
+                    String dataFile = MyPathFile.DATACAR.getPathUbuntu();
 
                     do {
                         input = sc.nextLine();
@@ -142,10 +142,7 @@ public class Main {
                         } else {
                             // После создания логина и пароля, записываем в файл
                             String result = login + "-"+password+"\n";
-                            //Files.write(Paths.get("/home/attenuator/IdeaProjects/JavaSb/src/Task20/User.txt"), "\n".getBytes(), StandardOpenOption.APPEND);
-                            Files.write(Paths.get("/home/attenuator/IdeaProjects/JavaSb/src/Task20/User.txt"), result.getBytes(), StandardOpenOption.APPEND);
-                            //Files.write(Paths.get("/home/attenuator/IdeaProjects/JavaSb/src/Task20/User.txt"), "\n".getBytes(), StandardOpenOption.APPEND);
-                            //Files.write(Paths.get("C:\\Users\\aitov-af\\IdeaProjects\\TaskPart2\\src\\NewTask\\User.txt"), result.getBytes(), StandardOpenOption.APPEND);
+                            Files.write(Paths.get(MyPathFile.USER.getPathUbuntu()), result.getBytes(), StandardOpenOption.APPEND);
                             System.out.println(String.format("Вы успешно зарегистрировались %s!", login));
                             break;
                         }
