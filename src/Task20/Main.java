@@ -51,19 +51,21 @@ public class Main {
                         mylog.logAdd(input, loginUser);
                         switch (input.split(" ")[0]) {
                             case "calc": {
+                                // Если указана дата то выводим по дате
                                 if (input.split(" ").length==2){
-                                    List<String> source = Files.readAllLines(Paths.get(dataFile));
-                                    Map<String, List<Car>> mapCarGroupDate = Complete.creatMapObjectCarGroupDate(source);
-                                    Complete.getTotalAndGroupCarGsm(mapCarGroupDate, input.split(" ")[1]);
+                                    List<String> source = Files.readAllLines(Paths.get(dataFile)); //  Считываем файл
+                                    Map<String, List<Car>> mapCarGroupDate = Complete.creatMapObjectCarGroupDate(source); //  Формируем мапу с объектами Car сгруппированых по дате
+                                    Complete.getTotalAndGroupCarGsm(mapCarGroupDate, input.split(" ")[1]); //  Расчитываем стоимость и выводим по дате кторую передали
 
                                 } else {
-                                    List<String> source = Files.readAllLines(Paths.get(dataFile));
-                                    List<String> sourceMain = new ArrayList<>();
+                                    // Если не указана дата формируем за все дни
+                                    List<String> source = Files.readAllLines(Paths.get(dataFile)); //  Считываем файл
+                                    List<String> sourceMain = new ArrayList<>(); //  Избавляемся от даты
                                     for (String str: source
                                          ) {
                                         sourceMain.add(str.split(" - ")[1]);
                                     }
-//                                    Создание массива экземпляров классов наследников Car
+//                                    Создание списка экземпляров Car
                                     List<Car> listCar = Complete.creatListObjectCarAllTime(sourceMain);
                                     //Общую стоимость расходов на ГСМ, так и расходы на каждый класс авто
                                     Complete.getTotalAndGroupCarGsm(listCar);
@@ -85,19 +87,23 @@ public class Main {
                             }
                             case "type": {
                                 List<String> source = Files.readAllLines(Paths.get(dataFile));
+                                //  Если передали только код автомобиля, рассчитываем за все дни
                                 if (input.split(" ").length==2){
-//                                Создание массива экземпляров классов наследников Car
+//                              //  Избавляемся от даты
                                 List<String> sourceMain = new ArrayList<>();
                                 for (String str: source
                                 ) {
                                     sourceMain.add(str.split(" - ")[1]);
                                 }
+                                // Формируем список экземпляров Car
                                 List<Car> listCar = Complete.creatListObjectCarAllTime(sourceMain);
-                                //Расходы ГСМ по типу авто
+                                //  рассчитываем ГСМ по всем автомобилям и выводим по нужному коду
                                 Complete.getTotalAndGroupCarGsm(listCar, input.split(" ")[1]);
                                 break;
                                 } else if (input.split(" ").length==3) {
+                                    // Если передали дату, формируем мапу экземплярво автомобилей группированных по дате
                                     Map<String, List<Car>> mapCarGroupDate = Complete.creatMapObjectCarGroupDate(source);
+                                    //Выводим стоимость ГСМ по определенному типу и за определенную дату
                                     Complete.getTotalAndGroupCarGsm(mapCarGroupDate, input.split(" ")[1], input.split(" ")[2]);
                                     break;
                                 } else {
