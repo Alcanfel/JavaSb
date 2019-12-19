@@ -15,9 +15,9 @@ public class Complete {
     public static Map<String, List<Car>> creatMapObjectCarGroupDate(List<String> data) throws IOException {
 
 //        Map<String, Double> mapPriceFuel = getDictFile(MyPathFile.PRICEFUEL.getPathWindow());
-        Map<String, Double> mapPriceFuel = getDictFile(MyPathFile.PRICEFUEL.getPathUbuntu());
+        Map<String, Double> mapPriceFuel = getDictFile(MyPathFile.PRICEFUEL.getPathWindow());
 //        Map<String, Double> mapRateFuel = getDictFile(MyPathFile.RATEFUEL.getPathWindow());
-        Map<String, Double> mapRateFuel = getDictFile(MyPathFile.RATEFUEL.getPathUbuntu());
+        Map<String, Double> mapRateFuel = getDictFile(MyPathFile.RATEFUEL.getPathWindow());
 
         Map<String, Map> dictSource= unionSameCodeCarAndGosNomerGroupDate(data);
         Map<String, List<Car>> dictCarGroupDate = new HashMap<>();
@@ -30,36 +30,16 @@ public class Complete {
                 Map<String, List> mapLevel3 = (Map<String, List>) dictSource.get(groupDate).get(String.valueOf(codeCar));
                 for (Object gosNomer: mapLevel3.keySet()
                 ) {
-                    switch (Integer.parseInt((String) codeCar)) {
-                        case 100: {
-                            Double i  = ((List<Double>)mapLevel3.get(gosNomer)).get(0);
-                            Car car = new Car((String) codeCar, String.valueOf(gosNomer), i, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                            listCar.add(car);
-                            break;
-                        }
-                        case 200: {
-                            Double i  = ((List<Double>)mapLevel3.get(gosNomer)).get(0);
-                            Double j = ((List<Double>)mapLevel3.get(gosNomer)).get(1);
-                            Car car = new Car((String) codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                            listCar.add(car);
-                            break;
-                        }
-                        case 300: {
-                            Double i  = ((List<Double>)mapLevel3.get(gosNomer)).get(0);
-                            Double j = ((List<Double>)mapLevel3.get(gosNomer)).get(1);
-                            Car car = new Car((String) codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                            listCar.add(car);
-                            break;
-                        }
-                        case 400: {
-                            Double i  = ((List<Double>)mapLevel3.get(gosNomer)).get(0);
-                            Double j = ((List<Double>)mapLevel3.get(gosNomer)).get(1);
-                            Car car = new Car((String) codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                            listCar.add(car);
-                            break;
-                        }
+                    if (Integer.parseInt((String) codeCar) == 100){
+                        Double i  = ((List<Double>)mapLevel3.get(gosNomer)).get(0);
+                        Car car = new Car((String) codeCar, String.valueOf(gosNomer), i, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
+                        listCar.add(car);
+                    } else {
+                        Double i  = ((List<Double>)mapLevel3.get(gosNomer)).get(0);
+                        Double j = ((List<Double>)mapLevel3.get(gosNomer)).get(1);
+                        Car car = new Car((String) codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
+                        listCar.add(car);
                     }
-
                 }
             }
             dictCarGroupDate.put(groupDate, listCar);
@@ -72,8 +52,8 @@ public class Complete {
     //Возвращает список объектов Car за все время
     public static List<Car> creatListObjectCarAllTime(List<String> data) throws IOException {
 
-        Map<String, Double> mapPriceFuel = getDictFile(MyPathFile.PRICEFUEL.getPathUbuntu());
-        Map<String, Double> mapRateFuel = getDictFile(MyPathFile.RATEFUEL.getPathUbuntu());
+        Map<String, Double> mapPriceFuel = getDictFile(MyPathFile.PRICEFUEL.getPathWindow());
+        Map<String, Double> mapRateFuel = getDictFile(MyPathFile.RATEFUEL.getPathWindow());
 
         Map<String, Map> dictSource= unionSameCodeCarAndGosNomer(data);
         List<Car> listCar = new ArrayList<>();
@@ -82,36 +62,16 @@ public class Complete {
         ) {
             for (Object gosNomer: dictSource.get(codeCar).keySet()
             ) {
-                switch (Integer.parseInt(codeCar)) {
-                    case 100: {
-                        Double i  = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(0);
-                        Car car = new Car(codeCar, String.valueOf(gosNomer), i, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                        listCar.add(car);
-                        break;
-                    }
-                    case 200: {
-                        Double i  = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(0);
-                        Double j = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(1);
-                        Car car = new Car(codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                        listCar.add(car);
-                        break;
-                    }
-                    case 300: {
-                        Double i  = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(0);
-                        Double j = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(1);
-                        Car car = new Car(codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                        listCar.add(car);
-                        break;
-                    }
-                    case 400: {
-                        Double i  = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(0);
-                        Double j = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(1);
-                        Car car = new Car(codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
-                        listCar.add(car);
-                        break;
-                    }
+                if (Integer.parseInt((String) codeCar) == 100){
+                    Double i  = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(0);
+                    Car car = new Car(codeCar, String.valueOf(gosNomer), i, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
+                    listCar.add(car);
+                } else {
+                    Double i  = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(0);
+                    Double j = ((List<Double>)dictSource.get(codeCar).get(gosNomer)).get(1);
+                    Car car = new Car(codeCar, String.valueOf(gosNomer), i, j, mapPriceFuel.get(codeCar), mapRateFuel.get(codeCar));
+                    listCar.add(car);
                 }
-
             }
         }
         return listCar;
@@ -448,40 +408,24 @@ public class Complete {
         return map;
     }
 
-    // Проверка второго аргумента на корректность
+    // проверка строки на корректность ввода, у типа 100 не должно быть доп параметра, по все остальным должен передавваться доп параметр
     public static boolean checkAutoCode(String s) {
-        switch (s.split("-")[0].split("_")[0].substring(1)){
-            case "100":{
-                if (Pattern.matches("C\\d*_\\d*-\\d*",s) && s.split("-").length == 2){
-                    return true;
-                } else return false;
-
-            }
-            case "200":{
-                if (Pattern.matches("C\\d*_\\d*-\\d*-*\\d*",s) && s.split("-").length == 3){
-                    return true;
-                } else return false;
-            }
-            case "300":{
-                if (Pattern.matches("C\\d*_\\d*-\\d*-*\\d*",s) && s.split("-").length == 3){
-                    return true;
-                } else return false;
-            }
-            case "400":{
-                if (Pattern.matches("C\\d*_\\d*-\\d*-*\\d*",s) && s.split("-").length == 3){
-                    return true;
-                } else return false;
-            } default: return false;
+        if (s.split("-")[0].split("_")[0].substring(1).equals("100")){
+            if (Pattern.matches("C\\d*_\\d*-\\d*",s) && s.split("-").length == 2){
+                return true;
+            } else return false;
+        } else{
+            if (Pattern.matches("C\\d*_\\d*-\\d*-*\\d*",s) && s.split("-").length == 3){
+                return true;
+            } else return false;
+        }
         }
 
-
-    }
 
     // Получить словарь пользователей, словарь формируется по файлу User.txt
     public static Map<String, String> getDictFileUser() throws IOException {
         Map<String, String> mapResult = new HashMap<>();
-        List<String> source = Files.readAllLines(Paths.get(MyPathFile.USER.getPathUbuntu()));
-//        List<String> source = Files.readAllLines(Paths.get(MyPathFile.USER.getPathWindow()));
+        List<String> source = Files.readAllLines(Paths.get(MyPathFile.USER.getPathWindow()));
         for (String s: source
         ) {
             mapResult.put(s.split("-")[0], s.split("-")[1]);

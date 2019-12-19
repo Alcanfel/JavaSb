@@ -12,10 +12,10 @@ public class Main {
 
 
         // Список пользователей
-        List<String> list = new ArrayList<>();
-        list.add("Attenuator");
-        list.add("Annihilator");
-        list.add("Alcanfel");
+        List<User> list = new ArrayList<>();
+        list.add(new User("Ivanov", "Ivan", 123131));
+        list.add(new User("Petrov", "Petr", 454545));
+        list.add(new User("Sidorov", "Sidr", 478884));
 
         // Создаем объект логирования, будем все записывать в файл log.txt
         MyLog mylog = new MyLog("log.txt");
@@ -29,11 +29,11 @@ public class Main {
         } while (!input.equals("exit"));
 
         //Отобразить действия по пользователю
-        MyLog.printGroupUser(mylog.file, "Attenuator");
+        MyLog.printGroupUser(mylog.file, "Ivanov");
         System.out.println();
-        MyLog.printGroupUser(mylog.file, "Alcanfel");
+        MyLog.printGroupUser(mylog.file, "Petrov");
         System.out.println();
-        MyLog.printGroupUser(mylog.file, "Annihilatorr");
+        MyLog.printGroupUser(mylog.file, "Sidorov");
 
 //        Отобразить действия в разрезе дня
         MyLog.printGroupDate(mylog.file);
@@ -41,8 +41,8 @@ public class Main {
     }
 
     // Рандомно получаем пользователя из списка
-    public static String getUserRandom(List<String> list){
+    public static String getUserRandom(List<User> list){
         Integer integer = (int) (Math.random()*3);
-        return list.get(integer);
+        return list.get(integer).toString();
     }
 }

@@ -31,7 +31,7 @@ public class MyLog {
     // Метод добавления в файл записи
     public void logAdd(String sc, String user) throws IOException {
         Date dateNow = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("MM:dd:yyyy HH:mm:ss");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Files.write(Paths.get(String.valueOf(this.file)),formatForDateNow.format(dateNow).getBytes(), StandardOpenOption.APPEND); //Добавляем Дату
         Files.write(Paths.get(String.valueOf(this.file))," - ".getBytes(), StandardOpenOption.APPEND);
         Files.write(Paths.get(String.valueOf(this.file)),user.getBytes(), StandardOpenOption.APPEND); // Добавляем пользователя
@@ -48,13 +48,13 @@ public class MyLog {
         for (String s: list
              ) {
             List<String> listValue = new ArrayList<>();
-            if (!map.containsKey(s.split(" - ")[1])){
+            if (!map.containsKey(s.split(" - ")[1].split("/")[1])){
                 listValue.add(s.split(" - ")[0] + " - " + s.split(" - ")[2]);
-                map.put(s.split(" - ")[1], listValue);
+                map.put(s.split(" - ")[1].split("/")[1], listValue);
             } else {
-                List<String>listValueOld = map.get(s.split(" - ")[1]);
+                List<String>listValueOld = map.get(s.split(" - ")[1].split("/")[1]);
                 listValueOld.add(s.split(" - ")[0] + " - " + s.split(" - ")[2]);
-                map.put(s.split(" - ")[1], listValueOld);
+                map.put(s.split(" - ")[1].split("/")[1], listValueOld);
             }
         }
 
@@ -72,11 +72,11 @@ public class MyLog {
     // Статический метод отображения действий по дате
     public static void printGroupDate(File file) throws IOException, ParseException {
         List<String> list = Files.readAllLines(Paths.get(String.valueOf(file)));
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("MM:dd:yyyy HH:mm:ss");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Map<String, List<String>> map = new HashMap<>();
         for (String s: list
              ) {
-            Date date = new SimpleDateFormat("MM:dd:yyyy HH:mm:ss").parse(s.split(" - ")[0]);
+            Date date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(s.split(" - ")[0]);
             List<String> listValue = new ArrayList<>();
             if (!map.containsKey(formatForDateNow.format(date).split(" ")[0])){
                 listValue.add(formatForDateNow.format(date).split(" ")[1] + " - " + s.split(" - ")[1] + " - " + s.split(" - ")[2]);

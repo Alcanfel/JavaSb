@@ -15,7 +15,7 @@ public enum MyPathFile {
     }
 
     public String getPathWindow() {
-        return pathWindow;
+        return pathUbuntu;
     }
 
     public String getPathUbuntu() {

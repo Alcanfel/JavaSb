@@ -15,189 +15,68 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         MyLog mylog = new MyLog("logging.txt"); // Создали объект логирования - файл logging.txt
+        User user = new User("Aitov", "Artur", 1231313);
 
-        while (true){ // в бесконечном цикле будем ожидать действия от пользователя, выйти из цила цифра 3
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Добро пожаловать в приложение ГСМ");
-            System.out.println("1) Выберите 1 для регистрации пользователя;");
-            System.out.println("2) Выберите 2 для авторизации;");
-            System.out.println("3) Выберите 3 для выхода;");
+        while (true){ // в бесконечном цикле будем ожидать действия от пользователя, выйти из цикла цифра 3
+            Scanner sc = new Scanner(System.in); //Поток ввода
+            UserSign.showMenu(); // Выводим меню по регистрации и авторизации пользователя
             String i = sc.nextLine();
-            String user = "noname"; // Пока что не знаем имя пользователя
-            mylog.logAdd(String.valueOf(i), user);
-            if (i.equals("1")){
-                registration(sc);  //  Вызывается метод регистрации
-                continue; // далее повторяем, переходим к след итерации
-            } else if (i.equals("2")){
-                String loginUser = autorisation(sc);
-                if (loginUser.equals("Пусто")){ // Авторизация
-                    System.out.println("Login or Password unknown");
-                    continue;
-                } else {
-                    Date dateNow = new Date();
-                    SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd/MM/yyyy");
-                    System.out.println(String.format("Добрый день, %s\nОперационный день: %s", loginUser, formatForDateNow.format(dateNow)));
-                    System.out.println("Вам доступны операции:\n1) add C[code]_[gos]-[probeg]-[dop_par] - добавление информации об авто в текущем опер дне.");
-                    System.out.println("2) calc dd/mm/yyyy- вывод итоговой информации по дате, если дату не указывать, выводит общую по всем датам");
-                    System.out.println("3) type [code] dd/mm/yyyy- вывод информации об отдельном типе авто, если дату не указывать, выводит общую по всем датам");
-                    System.out.println("4) exit - выход из программы");
-                    String input;
-                    // Путь к файлу хранится в энуме
-                    //String dataFile = MyPathFile.DATACAR.getPathUbuntu();
-                    String dataFile = MyPathFile.DATACAR.getPathUbuntu();
+            mylog.logAdd(String.valueOf(i), user.toString());
 
-                    do {
-                        input = sc.nextLine();
-                        mylog.logAdd(input, loginUser);
-                        switch (input.split(" ")[0]) {
-                            case "calc": {
-                                // Если указана дата то выводим по дате
-                                if (input.split(" ").length==2){
-                                    List<String> source = Files.readAllLines(Paths.get(dataFile)); //  Считываем файл
-                                    Map<String, List<Car>> mapCarGroupDate = Complete.creatMapObjectCarGroupDate(source); //  Формируем мапу с объектами Car сгруппированых по дате
-                                    Complete.getTotalAndGroupCarGsm(mapCarGroupDate, input.split(" ")[1]); //  Расчитываем стоимость и выводим по дате кторую передали
-
-                                } else {
-                                    // Если не указана дата формируем за все дни
-                                    List<String> source = Files.readAllLines(Paths.get(dataFile)); //  Считываем файл
-                                    List<String> sourceMain = new ArrayList<>(); //  Избавляемся от даты
-                                    for (String str: source
-                                         ) {
-                                        sourceMain.add(str.split(" - ")[1]);
-                                    }
-//                                    Создание списка экземпляров Car
-                                    List<Car> listCar = Complete.creatListObjectCarAllTime(sourceMain);
-                                    //Общую стоимость расходов на ГСМ, так и расходы на каждый класс авто
-                                    Complete.getTotalAndGroupCarGsm(listCar);
-                                }
-
-                                break;
-                            }
-                            case "add": {
-                                if (Complete.checkAutoCode(input.split(" ")[1])) {
-                                    Files.write(Paths.get(dataFile), "\n".getBytes(), StandardOpenOption.APPEND);
-                                    Files.write(Paths.get(dataFile), formatForDateNow.format(dateNow).getBytes(), StandardOpenOption.APPEND); // Добавляем дату
-                                    Files.write(Paths.get(dataFile), " - ".getBytes(), StandardOpenOption.APPEND); // Разделяем тире
-                                    Files.write(Paths.get(dataFile), input.split(" ")[1].getBytes(), StandardOpenOption.APPEND);
-                                    System.out.println(String.format("+ запись %s добавлена в файл DataCar.txt", input.split(" ")[1]));
-                                } else {
-                                    System.out.println(String.format("- запись %s не добавлена, формат ошибочный", input.split(" ")[1]));
-                                }
-                                break;
-                            }
-                            case "type": {
-                                List<String> source = Files.readAllLines(Paths.get(dataFile));
-                                //  Если передали только код автомобиля, рассчитываем за все дни
-                                if (input.split(" ").length==2){
-//                              //  Избавляемся от даты
-                                List<String> sourceMain = new ArrayList<>();
-                                for (String str: source
-                                ) {
-                                    sourceMain.add(str.split(" - ")[1]);
-                                }
-                                // Формируем список экземпляров Car
-                                List<Car> listCar = Complete.creatListObjectCarAllTime(sourceMain);
-                                //  рассчитываем ГСМ по всем автомобилям и выводим по нужному коду
-                                Complete.getTotalAndGroupCarGsm(listCar, input.split(" ")[1]);
-                                break;
-                                } else if (input.split(" ").length==3) {
-                                    // Если передали дату, формируем мапу экземплярво автомобилей группированных по дате
-                                    Map<String, List<Car>> mapCarGroupDate = Complete.creatMapObjectCarGroupDate(source);
-                                    //Выводим стоимость ГСМ по определенному типу и за определенную дату
-                                    Complete.getTotalAndGroupCarGsm(mapCarGroupDate, input.split(" ")[1], input.split(" ")[2]);
-                                    break;
-                                } else {
-                                    System.out.println("Вы не указали код автомобиля");
-                                    break;
-                                }
-                            }
-                            case "exit": {
-                                System.out.println("- выход из программы");
-                                break;
-                            }
-                            default: {
-                                System.out.println(String.format("- команда %s отсутствует", input.split(" ")[0]));
-                            }
-                        }
-                    } while (!input.equals("exit"));
+            switch (i){
+                case "1":{
+                    UserSign.registration(sc);  //  Вызывается метод регистрации
+                    break; // далее повторяем, переходим к след итерации
                 }
-                continue;
-            } else if (i.equals("3")){
-                System.out.println("Пока!");
-                break;
-            } else {
-                System.out.println("Нужно выбрать 1, 2 или 3");
-                continue;
-            }
-        }
+                case "2":{
+                    UserSign loginUser = UserSign.autorisation(sc);
+                    if (loginUser.getLogin() == null){ // Авторизация
+                        System.out.println("Login or Password unknown");
+                        continue;
+                    } else {
+                        MainCar.showMenu(loginUser.getLogin());
+                        String input;
+                        // Путь к файлу хранится в энуме
+                        //String dataFile = MyPathFile.DATACAR.getPathUbuntu();
 
-
-
-
-    }
-
-    // Авторизация
-    public static String autorisation(Scanner sc) throws IOException {
-        MyLog mylog = new MyLog("logging.txt");
-        Map<String,String> mapUser = Complete.getDictFileUser(); // словарь c пользваотелями
-        System.out.print("Введите логин: ");
-        String login = sc.nextLine();
-        mylog.logAdd(login, login);
-        if (!mapUser.containsKey(login)){
-            System.out.println("Логин отсутствует в системе");
-            return "Пусто";
-        } else {
-            System.out.print("Введите пароль: ");
-            String password = sc.nextLine();
-            mylog.logAdd(password, login);
-            if (mapUser.get(login).equals(password)){
-                return login;
-
-            } else {
-                System.out.println("Пароль введен неверно");
-                return "Пусто";
-            }
-        }
-    }
-
-    // Регистрация пользователя
-    public static void registration(Scanner sc) throws IOException {
-        MyLog mylog = new MyLog("logging.txt");
-        Map<String, String> user = Complete.getDictFileUser(); // словарь для пользователя (Логин-пароль)
-        while (true){ // Бескоечный цикл, где выход это обязательная регистрация или если логин уже имеется в файле
-            System.out.print("Введите логин: ");
-            String login = sc.nextLine();
-            mylog.logAdd(login, "noname");
-            if (!user.containsKey(login)){ // Проверяем на наличие логина в файле, если есть идем дальше, нет выходим в главное регистрации и авторизации
-                if (login.length()<8){  //  Проверяем длину
-                    System.out.println("Логин должен быть больше 7 символов");
-                    continue;
-                } else {
-                    while (true){
-                        System.out.print("Введите пароль: ");
-                        String password = sc.nextLine();
-                        mylog.logAdd(password, login);
-                        if (password.length()<8){
-                            System.out.println("Пароль должен содержать больше 7 символов");
-                            continue;
-                        } else {
-                            // После создания логина и пароля, записываем в файл
-                            String result = login + "-"+password+"\n";
-                            Files.write(Paths.get(MyPathFile.USER.getPathUbuntu()), result.getBytes(), StandardOpenOption.APPEND);
-//                            Files.write(Paths.get(MyPathFile.USER.getPathWindow()), result.getBytes(), StandardOpenOption.APPEND);
-                            System.out.println(String.format("Вы успешно зарегистрировались %s!", login));
-                            break;
-                        }
+                        do {
+                            input = sc.nextLine();
+                            mylog.logAdd(input, user.toString());
+                            switch (input.split(" ")[0]) {
+                                case "calc": {
+                                    MainCar.calc(input);
+                                    break;
+                                }
+                                case "add": {
+                                    MainCar.add(input);
+                                    break;
+                                }
+                                case "type": {
+                                    MainCar.type(input);
+                                    break;
+                                }
+                                case "exit": {
+                                    System.out.println("- выход из программы");
+                                    break;
+                                }
+                                default: {
+                                    System.out.println(String.format("- команда %s отсутствует", input.split(" ")[0]));
+                                }
+                            }
+                        } while (!input.equals("exit"));
                     }
                     break;
                 }
-            } else {
-                System.out.println(String.format("Пользоваль с логином %s уже имеется в базе", login));
-                break;
-            }
+                case "3":{
+                    System.out.println("Пока!");
+                    break;
+                }
+                default:{
+                    System.out.println("Нужно выбрать 1, 2 или 3");
+                    break;
+                }
 
+            }
         }
     }
-
-
 }
