@@ -9,7 +9,8 @@ public class BDConnectionSS {
 
     public static synchronized BDConnectionSS getInstance() throws SQLException, ClassNotFoundException {
         if (instance == null){
-            instance = new BDConnectionSS("com.microsoft.sqlserver.jdbc.SQLServerDriver","jdbc:sqlserver://MSQLTEST.sbcorp.ub.sbrf.ru\\CP1251;databaseName=JavaReboot;user=sbersaleZSB;password=Aa111111");
+            instance = new BDConnectionSS("com.microsoft.sqlserver.jdbc.SQLServerDriver","jdbc:
+;databaseName=J;user=;password=");
         } return instance;
     }
 
