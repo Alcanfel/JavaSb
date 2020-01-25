@@ -11,17 +11,19 @@ public class Main {
         Method[] methods = calc.getDeclaredMethods();
         for (Method method: methods
              ) {
-            Check check = method.getAnnotation(Check.class);
-            CheckA checkA = method.getAnnotation(CheckA.class);
-
-           int i = (int) method.invoke(null, check.in1(), check.in2() );
-           int j = (int) method.invoke(null, checkA.in1(),checkA.in2());
-            if (i == check.out() && j == checkA.out()){
-                System.out.println("Проверка пройдена");
+            MyRepeatedCheck annotations = method.getAnnotation(MyRepeatedCheck.class);
+            for (Annotation check: annotations.value()
+                 ) {
+                Check checkUnique = (Check) check;
+                int i = (int) method.invoke(null, checkUnique.in1(), checkUnique.in2() );
+            if (i == checkUnique.out()){
+                System.out.println(method.getName() + " Проверка пройдена");
             } else {
-                System.out.println("Проверка не пройдена");
+                System.out.println(method.getName() + "Проверка не пройдена");
+//            }
             }
-    }
+            }
         }
     }
+}
 
