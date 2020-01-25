@@ -1,5 +1,5 @@
 # JavaSb
-| 1 блок        | 2 блок  | 3 блок | 4 блок | 5 блок | 6 блок |
+| 1 блок        | 2 блок  | 3 блок | 4 блок | 5 блок | 6 блок | 7 блок |
 | :------------ |:---------------:| -----:| -----:| -----:| -----:|
 | [Task1](https://github.com/Alcanfel/JavaSb/blob/master/src/Task1.java)  |  [Task1](https://github.com/Alcanfel/JavaSb/tree/master/src/Task7_1)  | [Task1](https://github.com/Alcanfel/JavaSb/tree/master/src/Task11) | [Task1](https://github.com/Alcanfel/JavaSb/tree/master/src/Task1419/Task1) | [Stack](https://github.com/Alcanfel/JavaSb/tree/master/src/Task11/Calculator)|[GSM IO\NIO](https://github.com/Alcanfel/JavaSb/tree/master/src/Task20) 
 | [Task2](https://github.com/Alcanfel/JavaSb/blob/master/src/Task2.java)  |  [Task2](https://github.com/Alcanfel/JavaSb/tree/master/src/Task8_2)        |   [Task2](https://github.com/Alcanfel/JavaSb/tree/master/src/Task12_2) |[Task2](https://github.com/Alcanfel/JavaSb/tree/master/src/Task1419/Task2) | [Queue](https://github.com/Alcanfel/JavaSb/tree/master/src/MyQueue) |[MyLogging](https://github.com/Alcanfel/JavaSb/tree/master/src/Task21) 
