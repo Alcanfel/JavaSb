@@ -4,46 +4,29 @@ import java.util.Map;
 
 public class ParseUtil {
     public static void printJson(Map map){
+        Map mapNew = new java.util.HashMap<String, Map<String, String>>(Map.copyOf(map));
         StringBuilder json = new StringBuilder("{");
-        Integer razmer = map.keySet().size();
-        Integer iter = 1;
         for ( Object string: map.keySet()
         ) {
-            if (iter.equals(razmer)){
-                json.append("'"+string+"':");
-                Map<String, String> mapValue = (Map<String, String>) map.get(string);
-                Integer razmerValue = mapValue.keySet().size();
-                Integer iterValue = 1;
-                json.append("{");
-                for (Object stringValue: mapValue.keySet()
-                ) {
-                    if (iterValue.equals(razmerValue)){
+            mapNew.remove(string);
+            json.append("'"+string+"':");
+            Map<String, String> mapValue = (Map<String, String>) map.get(string);
+            Map<String, String> mapValueCopy = new java.util.HashMap<>(Map.copyOf(mapValue));
+            json.append("{");
+            for (Object stringValue: mapValue.keySet()
+                    ) {
+                mapValueCopy.remove(stringValue);
+                    if (mapValueCopy.isEmpty()){
                         json.append("'"+stringValue+"':'"+mapValue.get(stringValue)+"'}");
                     } else {
                         json.append("'"+stringValue+"':'"+mapValue.get(stringValue)+"',");
                     }
-                    iterValue++;
                 }
+            if (mapNew.isEmpty()){
                 json.append("}");
-            } else{
-                json.append("'"+string+"':");
-                Map<String, String> mapValue = (Map<String, String>) map.get(string);
-                Integer razmerValue = mapValue.keySet().size();
-                Integer iterValue = 1;
-                json.append("{");
-                for (Object stringValue: mapValue.keySet()
-                     ) {
-                    if (iterValue.equals(razmerValue)){
-                        json.append("'"+stringValue+"':'"+mapValue.get(stringValue)+"'}");
-                    } else {
-                        json.append("'"+stringValue+"':'"+mapValue.get(stringValue)+"',");
-                    }
-                    iterValue++;
-                }
-                json.append(",");
+            } else  json.append(",");
             }
-            iter++;
-        }
         System.out.println(json);
+        }
     }
-}
+

@@ -52,7 +52,6 @@ public class Main {
             }
             typeJSON.put(cl.getDeclaredField("tab").get(user).toString(), valueJson);
         }
-
         //Преобразуем словарь в формат json
         ParseUtil.printJson(typeJSON);
     }
